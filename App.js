@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import  Header from './components/Header'
-import ListItem from './components/ListItem'
+import Header from './components/Header';
+import ListItem from './components/ListItem';
+import AddItem from './components/AddItem'; 
+
 // import { uuid } from 'uuidv4'
 import uuid from 'uuid-random'
 
@@ -19,9 +21,16 @@ const App = () => {
     });
   }
 
+  const addItem = (text) =>{
+    setItems(prevItems => {
+      return [{id: uuid(), text},...prevItems]
+    })
+  }
+
   return (
     <View style={styles.container}>
       <Header title="Shopping List"/>
+      <AddItem addItem={addItem}/>
       <FlatList 
         data={items} 
         renderItem={({item})=>(
